@@ -1,4 +1,4 @@
-baseURL = "";
+baseURL = "https://raw.githubusercontent.com/srnerturk/flapibird/master/";
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 let game;
