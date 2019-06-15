@@ -60,6 +60,8 @@ function play() {
         y: 0
     };
 
+    
+
     var btn = document.getElementById("startGame");
     btn.style.display = "block";
 
