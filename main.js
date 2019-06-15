@@ -95,11 +95,11 @@ function draw() {
             status.style.display = "none";
         }
         if (
-            (game.player.x + playerWidth >= block.x &&
+                (game.player.x + playerWidth-20 >= block.x &&
                 game.player.x <= block.x + pipeTop.width &&
                 (game.player.y <= block.y + pipeTop.height ||
-                    game.player.y + playerHeight >= block.y + constant)) ||
-            game.player.y + playerHeight >= canvas.height - groundHeight
+                game.player.y + playerHeight-20 >= block.y-10 + constant)) ||
+            game.player.y + playerHeight-20 >= canvas.height - groundHeight
         ) {
             gameScore = game.score;
             death = true;
@@ -165,7 +165,7 @@ render();
 function keyDown(e) {
     let key = e.code;
     if ((key == "KeyW") | (key == "Space")) {
-        game.player.y -= 30;
+        game.player.y -= 40;
         jump.play();
         game.state = "started";
     }
