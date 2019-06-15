@@ -117,8 +117,7 @@ function draw() {
                 y: Math.floor(Math.random() * pipeTop.height) - pipeTop.height
             });
         }
-
-        if (block.x == -5) {
+        if (block.x == -6) {
             game.score++;
         }
     }
