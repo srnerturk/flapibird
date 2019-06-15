@@ -2,8 +2,8 @@ baseURL = "https://raw.githubusercontent.com/srnerturk/flapibird/master/";
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 let game;
-let death=false;
-let gameScore=0;
+let death = false;
+let gameScore = 0;
 play();
 
 let constant;
@@ -15,6 +15,10 @@ let bg = new Image();
 let ground = new Image();
 let pipeTop = new Image();
 let pipeBottom = new Image();
+
+
+let jump = new Audio();
+jump.src=game.sounds.jump;
 
 
 player.src = game.images.bird;
@@ -40,6 +44,9 @@ function play() {
             tubeN: baseURL + "assets/blockN.png",
             tubeS: baseURL + "assets/blockS.png"
         },
+        sounds: {
+            jump: baseURL + "assets/jump.wav"
+        },
         player: {
             x: 10,
             y: 250
@@ -53,14 +60,14 @@ function play() {
         y: 0
     };
 
-    var btn=document.getElementById("startGame");
-    btn.style.display="block";
+    var btn = document.getElementById("startGame");
+    btn.style.display = "block";
 
-        if(death){
-            var status=document.getElementById("status");
-            status.style.display="block";
-            status.innerHTML="Geberdin :) Skorun : " + gameScore;
-        }
+    if (death) {
+        var status = document.getElementById("status");
+        status.style.display = "block";
+        status.innerHTML = "Geberdin :) Skorun : " + gameScore;
+    }
 
 }
 
@@ -70,8 +77,8 @@ function draw() {
     playerWidth = 60;
 
     if (game.player.y + playerHeight >= game.screen.height - groundHeight) {
-        death=true;
-        gameScore=game.score;
+        death = true;
+        gameScore = game.score;
         play();
     }
     for (let i = 0; i < game.blocks.length; i++) {
@@ -82,10 +89,10 @@ function draw() {
 
         if (game.state == "started") {
             block.x--;
-            var btn=document.getElementById("startGame");
-            var status=document.getElementById("status");
-            btn.style.display="none";
-            status.style.display="none";
+            var btn = document.getElementById("startGame");
+            var status = document.getElementById("status");
+            btn.style.display = "none";
+            status.style.display = "none";
         }
         if (
             (game.player.x + playerWidth >= block.x &&
@@ -94,8 +101,8 @@ function draw() {
                     game.player.y + playerHeight >= block.y + constant)) ||
             game.player.y + playerHeight >= canvas.height - groundHeight
         ) {
-            gameScore=game.score;
-            death=true;
+            gameScore = game.score;
+            death = true;
             play();
             resizeWindow();
         }
@@ -159,6 +166,7 @@ function keyDown(e) {
     let key = e.code;
     if ((key == "KeyW") | (key == "Space")) {
         game.player.y -= 30;
+        jump.play();
         game.state = "started";
     }
 
@@ -173,16 +181,18 @@ function keyDown(e) {
 
 function touchEvent(e) {
     let key = e.type;
-  
+
     if (key == "touchstart") {
-      game.player.y -= 30;
-      game.state = "started";
+        game.player.y -= 30;
+        jump.play();
+        game.state = "started";
+        
     }
-  }
+}
 
 
-function StartGame(){
-    game.state="started";
+function StartGame() {
+    game.state = "started";
 }
 
 window.addEventListener("keydown", keyDown);
