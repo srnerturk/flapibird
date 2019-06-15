@@ -49,14 +49,14 @@ function play() {
         },
         player: {
             x: 10,
-            y: 250
+            y: 150
         },
     }
     canvas.width = game.screen.width;
     canvas.height = game.screen.height;
 
     game.blocks[0] = {
-        x: canvas.width / 2,
+        x: 440,
         y: 0
     };
 
@@ -96,26 +96,27 @@ function draw() {
             status.style.display = "none";
         }
         if (
-        (game.player.x + playerWidth-20 >= block.x &&
-        game.player.x <= block.x + pipeTop.width &&
-        (game.player.y <= block.y + pipeTop.height ||
-        game.player.y + playerHeight-20 >= block.y-10 + constant)) ||
-        game.player.y + playerHeight-20 >= canvas.height - groundHeight
+            (game.player.x + playerWidth - 20 >= block.x &&
+                game.player.x <= block.x + pipeTop.width &&
+                (game.player.y <= block.y + pipeTop.height ||
+                    game.player.y + playerHeight - 20 >= block.y - 10 + constant)) ||
+            game.player.y + playerHeight - 20 >= canvas.height - groundHeight
         ) {
-        gameScore = game.score;
-        death = true;
-        play();
-        resizeWindow();
+            gameScore = game.score;
+            death = true;
+            play();
+            resizeWindow();
         }
 
-       
 
-        if (block.x == 450) {
-            let value=0;
-            value=Math.floor(Math.random() * pipeTop.height) - pipeTop.height;
-            if(value<-180){
-                value=-150;
+
+        if (block.x == 430) {
+            let value = 0;
+            value = Math.floor(Math.random() * pipeTop.height) - pipeTop.height;
+            if (value < -180) {
+                value = -150;
             }
+            console.log(value);
             game.blocks.push({
                 x: game.screen.width,
                 y: value
