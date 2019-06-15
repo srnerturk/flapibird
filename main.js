@@ -88,7 +88,7 @@ function draw() {
         constant = pipeTop.height + gap;
         context.drawImage(pipeTop, block.x, block.y);
         context.drawImage(pipeBottom, block.x, block.y + constant);
-
+        console.log(block.y);
         if (game.state == "started") {
             block.x = block.x - 2;
             var btn = document.getElementById("startGame");
@@ -112,9 +112,14 @@ function draw() {
        
 
         if (block.x == 450) {
+            let myValue=0;
+             myValue=Math.random() * pipeTop.height;
+            if(myValue<-150){
+                myValue=-200;
+            }
             game.blocks.push({
                 x: game.screen.width,
-                y: Math.floor(Math.random() * pipeTop.height) - pipeTop.height
+                y: Math.floor(myValue) - pipeTop.height
             });
         }
         if (block.x == -6) {
