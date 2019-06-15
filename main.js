@@ -7,7 +7,7 @@ let gameScore = 0;
 play();
 
 let constant;
-let gap = 150;
+let gap = 310;
 
 
 let player = new Image();
@@ -18,7 +18,7 @@ let pipeBottom = new Image();
 
 
 let jump = new Audio();
-jump.src=game.sounds.jump;
+jump.src = game.sounds.jump;
 
 
 player.src = game.images.bird;
@@ -33,12 +33,12 @@ function play() {
         blocks: [],
         score: 0,
         screen: {
-            width: 600,
-            height: 600
+            width: 1000,
+            height: 809
         },
-        gravity: 2,
+        gravity: 0,
         images: {
-            background: baseURL + "assets/bg2.png",
+            background: baseURL + "assets/bg.png",
             ground: baseURL + "assets/ground.png",
             bird: baseURL + "assets/bird.png",
             tubeN: baseURL + "assets/blockN.png",
@@ -60,7 +60,7 @@ function play() {
         y: 0
     };
 
-    
+
 
     var btn = document.getElementById("startGame");
     btn.style.display = "block";
@@ -74,11 +74,11 @@ function play() {
 }
 
 function draw() {
-    playerHeight = 60;
-    groundHeight = 70;
-    playerWidth = 60;
+    playerHeight = 80;
+    groundHeight = 110;
+    playerWidth = 80;
 
-    if (game.player.y + playerHeight >= game.screen.height - groundHeight) {
+    if (game.player.y + playerHeight >= game.screen.height - groundHeight + 25) {
         death = true;
         gameScore = game.score;
         play();
@@ -90,26 +90,28 @@ function draw() {
         context.drawImage(pipeBottom, block.x, block.y + constant);
 
         if (game.state == "started") {
-            block.x--;
+            block.x = block.x - 2;
             var btn = document.getElementById("startGame");
             var status = document.getElementById("status");
             btn.style.display = "none";
             status.style.display = "none";
         }
         if (
-                (game.player.x + playerWidth-20 >= block.x &&
-                game.player.x <= block.x + pipeTop.width &&
-                (game.player.y <= block.y + pipeTop.height ||
-                game.player.y + playerHeight-20 >= block.y-10 + constant)) ||
-            game.player.y + playerHeight-20 >= canvas.height - groundHeight
+        (game.player.x + playerWidth-20 >= block.x &&
+        game.player.x <= block.x + pipeTop.width &&
+        (game.player.y <= block.y + pipeTop.height ||
+        game.player.y + playerHeight-20 >= block.y-10 + constant)) ||
+        game.player.y + playerHeight-20 >= canvas.height - groundHeight
         ) {
-            gameScore = game.score;
-            death = true;
-            play();
-            resizeWindow();
+        gameScore = game.score;
+        death = true;
+        play();
+        resizeWindow();
         }
 
-        if (block.x == 250) {
+       
+
+        if (block.x == 450) {
             game.blocks.push({
                 x: game.screen.width,
                 y: Math.floor(Math.random() * pipeTop.height) - pipeTop.height
@@ -124,20 +126,21 @@ function draw() {
     context.drawImage(
         ground,
         0,
-        game.screen.height - ground.height + 150,
+        game.screen.height - ground.height + 110,
         game.screen.width,
-        60
+        110
     );
     context.drawImage(
         player,
         game.player.x,
         game.player.y,
-        65,
-        65
+        85,
+        85
     );
 
     if (game.state == "started") {
         game.player.y += game.gravity;
+        game.gravity += 1.25;
     }
 }
 
@@ -146,8 +149,8 @@ function resizeWindow() {
         game.screen.width = innerWidth;
         canvas.width = innerWidth;
     } else {
-        game.screen.width = 600;
-        canvas.width = 600;
+        game.screen.width = 1026;
+        canvas.width = 1026;
     }
 }
 
@@ -167,7 +170,7 @@ render();
 function keyDown(e) {
     let key = e.code;
     if ((key == "KeyW") | (key == "Space")) {
-        game.player.y -= 40;
+        game.gravity = -13;
         jump.play();
         game.state = "started";
     }
@@ -181,14 +184,16 @@ function keyDown(e) {
     }
 }
 
+let velocityY = 0;
+
 function touchEvent(e) {
     let key = e.type;
 
     if (key == "touchstart") {
-        game.player.y -= 30;
+        game.gravity = -13;
         jump.play();
         game.state = "started";
-        
+
     }
 }
 
