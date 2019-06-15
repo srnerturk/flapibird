@@ -171,9 +171,19 @@ function keyDown(e) {
     }
 }
 
+function touchEvent(e) {
+    let key = e.type;
+  
+    if (key == "touchstart") {
+      game.player.y -= 30;
+      game.state = "started";
+    }
+  }
+
 
 function StartGame(){
     game.state="started";
 }
 
 window.addEventListener("keydown", keyDown);
+window.addEventListener("touchstart", touchEvent);
