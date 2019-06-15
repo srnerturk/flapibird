@@ -1,0 +1,11 @@
+{
+  "name": "flapi-bord",
+  "version": "1.0.0",
+  "description": "jump jump jump",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "serhan erturk",
+  "license": "ISC"
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flapi bord</title>
+    <style>
+        body {
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #111;
+            height: 100vh;
+        }
+
+        .startGame{
+            position: absolute;
+            background: red;
+            width: 160px;
+            height:52px;
+            font-size:18px;
+            font-family: monospace;
+            color:white;
+            border:2px solid white;
+            cursor: pointer;
+        }
+
+        #status{
+            position:absolute;
+            top:250px;
+            color:red;
+            font-family: monospace;
+            font-weight: 700;
+            font-size:32px;
+            display: none;
+
+        }
+
+        canvas {
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <label id="status"></label>
+    <button onclick="StartGame()" class="startGame" id="startGame">Başla</button>
+    <script src="main.js"></script>
+</body>
+
+</html>
