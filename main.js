@@ -28,6 +28,7 @@ pipeTop.src = game.images.tubeN;
 pipeBottom.src = game.images.tubeS;
 
 function play() {
+    // System working - first control point for game initialization
     game = {
         state: "pause",
         blocks: [],
