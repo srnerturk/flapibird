@@ -28,6 +28,9 @@ pipeTop.src = game.images.tubeN;
 pipeBottom.src = game.images.tubeS;
 
 function play() {
+    // System testing comment log
+    console.log("Hello World, this is a ai comment :)");
+
     game = {
         state: "pause",
         blocks: [],
